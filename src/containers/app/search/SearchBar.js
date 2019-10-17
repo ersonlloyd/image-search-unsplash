@@ -14,7 +14,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="ui segment">
-        <form onSubmit={this.onFormSubmit} data-testid="buttonId" className="ui form">
+        <form onSubmit={this.onFormSubmit} data-testid="formId" className="ui form">
           <div className="field">
             <label>Image Search</label>
             <div className="ui icon input">
@@ -26,11 +26,15 @@ class SearchBar extends React.Component {
                 data-testid="searchId"
                 onChange={e => this.setState({ term: e.target.value })}
               />
-              <button
-                className="ui button primary"
-                style={{display: 'flex'}}
-                >Search
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  data-testid="submit"
+                  className="ui button primary"
+                  style={{display: 'flex'}}
+                  >Search
+                </button>
+              </div>
             </div>
           </div>
         </form>
