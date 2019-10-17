@@ -2,28 +2,38 @@ import React from 'react'
 import { cleanup, render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import SearchBar from 'app/search/SearchBar'
+import axiosMock from 'axios'
 
 afterEach(cleanup)
 
+const setup = () => {
+  const utils = render(<SearchBar />)
+  const input = utils.getByTestId('searchId')
+  return {
+    input,
+    ...utils,
+  }
+}
+
 describe("SearchBar", () => {
-
   test('Check Strings in SearchBar', () => {
-      const { getAllByText } = render(<SearchBar />)
+    const { getAllByText } = render(<SearchBar />)
 
-      const searchCount = getAllByText(/Search/)
-      const imageCount =  getAllByText(/Image/)
+    const searchCount = getAllByText(/Search/)
+    const imageCount =  getAllByText(/Image/)
 
-      expect(imageCount).toHaveLength(1)
-      expect(searchCount).toHaveLength(2)
-    })
+    expect(imageCount).toHaveLength(1)
+    expect(searchCount).toHaveLength(2)
+  })
 
   test('Capture Search Input', () => {
-    const { getByTestId } = render(<SearchBar />)
-    fireEvent.change(getByTestId('searchId'), {
+    const { input } = setup()
+    fireEvent.change(input, {
       target: {
         value: "twitter"
       }
     })
+    expect(input.value).toBe('twitter')
   })
 
   test('Capture Search Button', () => {
