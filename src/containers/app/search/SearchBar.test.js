@@ -2,7 +2,6 @@ import React from 'react'
 import { cleanup, render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import SearchBar from 'app/search/SearchBar'
-import axiosMock from 'axios'
 
 afterEach(cleanup)
 
